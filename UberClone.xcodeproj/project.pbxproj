@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B53192C32449283B00210134 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53192C22449283B00210134 /* Extensions.swift */; };
+		B51DC242244A326300765BB8 /* UITextFieldExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DC241244A326300765BB8 /* UITextFieldExtensions.swift */; };
+		B51DC244244A328700765BB8 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51DC243244A328700765BB8 /* UIViewExtensions.swift */; };
+		B535A1B2244A3A91005585F0 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1B1244A3A91005585F0 /* UIColorExtensions.swift */; };
+		B535A1B4244A429C005585F0 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1B3244A429C005585F0 /* SignUpController.swift */; };
 		B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECD5E7244921CF00F0A82F /* AppDelegate.swift */; };
 		B5ECD5EA244921CF00F0A82F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECD5E9244921CF00F0A82F /* SceneDelegate.swift */; };
 		B5ECD5EF244921CF00F0A82F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5ECD5ED244921CF00F0A82F /* Main.storyboard */; };
@@ -17,7 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B53192C22449283B00210134 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B51DC241244A326300765BB8 /* UITextFieldExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtensions.swift; sourceTree = "<group>"; };
+		B51DC243244A328700765BB8 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		B535A1B1244A3A91005585F0 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		B535A1B3244A429C005585F0 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		B5ECD5E4244921CF00F0A82F /* UberClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5ECD5E7244921CF00F0A82F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5ECD5E9244921CF00F0A82F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +45,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B51DC245244A329F00765BB8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B51DC243244A328700765BB8 /* UIViewExtensions.swift */,
+				B51DC241244A326300765BB8 /* UITextFieldExtensions.swift */,
+				B535A1B1244A3A91005585F0 /* UIColorExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B5ECD5DB244921CF00F0A82F = {
 			isa = PBXGroup;
 			children = (
@@ -76,7 +92,7 @@
 		B5ECD5FF2449221300F0A82F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B53192C22449283B00210134 /* Extensions.swift */,
+				B51DC245244A329F00765BB8 /* Extensions */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -92,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				B5ECD604244922B700F0A82F /* LoginController.swift */,
+				B535A1B3244A429C005585F0 /* SignUpController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -183,8 +200,11 @@
 			files = (
 				B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */,
 				B5ECD605244922B700F0A82F /* LoginController.swift in Sources */,
+				B535A1B4244A429C005585F0 /* SignUpController.swift in Sources */,
+				B51DC242244A326300765BB8 /* UITextFieldExtensions.swift in Sources */,
+				B535A1B2244A3A91005585F0 /* UIColorExtensions.swift in Sources */,
 				B5ECD5EA244921CF00F0A82F /* SceneDelegate.swift in Sources */,
-				B53192C32449283B00210134 /* Extensions.swift in Sources */,
+				B51DC244244A328700765BB8 /* UIViewExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
