@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
 
@@ -21,13 +22,13 @@ class LoginController: UIViewController {
     
     
     private lazy var emailContainerView: UIView = {
-        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextField)
+        let view = UIView().inputContainerView(image: UIImage(systemName: "envelope") ?? #imageLiteral(resourceName: "ic_mail_outline_white_2x") , textField: emailTextField)
         view.anchor(height: 50)
         return view
     }()
     
     private lazy var passwordContainerView: UIView = {
-        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
+        let view = UIView().inputContainerView(image: UIImage(systemName: "lock") ?? #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
         view.anchor(height: 50)
         return view
     }()
@@ -41,32 +42,19 @@ class LoginController: UIViewController {
         return UITextField().textField(withPlaceholder: "Password", isSecureTextEntry: true)
     }()
     
-    private let loginButton: UIButton = {
-        let button = UIButton()
+    private let loginButton: AuthButton = {
+        let button = AuthButton(type: .system)
         button.setTitle("Login", for: .normal)
-        button.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
-        button.backgroundColor = .mainBlueTint
-        button.layer.cornerRadius = 5
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
         return button
     }()
     
     
     private let noAccountButton: UIButton = {
-       let button = UIButton()
-        
-        let attributedTitle = NSMutableAttributedString(string: "Don't have an account? ",attributes:
-                                    [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16),
-                                     NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-        
-        attributedTitle.append(NSAttributedString(string: "Sign Up ", attributes:
-                                    [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16),
-                                     NSAttributedString.Key.foregroundColor : UIColor.mainBlueTint]))
-        
+        let button = AccountButton(type: .system)
+        button.setupLabel(question: "Don't have an account?", actionName: "Sign Up")
         button.addTarget(self, action: #selector(showSignUpPage), for: .touchUpInside)
-        
-        button.setAttributedTitle(attributedTitle, for: .normal)
         return button
     }()
       
@@ -83,6 +71,25 @@ class LoginController: UIViewController {
     
     
     //MARK: - Selectors
+    
+    @objc private func loginButtonPressed() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("DEBUG: Failed login user, error: \(error.localizedDescription)")
+                return
+            }
+            
+            print("DEBUG: Succesful login!")
+            let rootController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController
+            guard let controller = rootController as? HomeController else {return}
+            controller.configureUI()
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     
     @objc func showSignUpPage() {
         let signupVC = SignUpController()

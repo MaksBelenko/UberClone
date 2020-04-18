@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+
 
 class SignUpController: UIViewController {
     
@@ -20,25 +22,25 @@ class SignUpController: UIViewController {
     }()
     
     private lazy var emailContainerView: UIView = {
-        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextField)
+        let view = UIView().inputContainerView(image: UIImage(systemName: "envelope") ?? #imageLiteral(resourceName: "ic_mail_outline_white_2x"), textField: emailTextField)
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
     
     private lazy var fullnameContainerView: UIView = {
-        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: fullnameTextField)
+        let view = UIView().inputContainerView(image: UIImage(systemName: "person") ?? #imageLiteral(resourceName: "ic_person_outline_white_2x"), textField: fullnameTextField)
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
     
     private lazy var passwordContainerView: UIView = {
-        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
+        let view = UIView().inputContainerView(image: UIImage(systemName: "lock") ?? #imageLiteral(resourceName: "ic_lock_outline_white_2x"), textField: passwordTextField)
         view.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return view
     }()
     
     private lazy var accountTypeContainerView: UIView = {
-        let view = UIView().inputContainerView(image: #imageLiteral(resourceName: "ic_account_box_white_2x"), segmentedControl: accountTypeSegmentedControl)
+        let view = UIView().inputContainerView(image: UIImage(systemName: "person.crop.square.fill") ?? #imageLiteral(resourceName: "ic_person_outline_white_2x"), segmentedControl: accountTypeSegmentedControl)  // 􀉺
         view.heightAnchor.constraint(equalToConstant: 80).isActive = true
         return view
     }()
@@ -58,13 +60,27 @@ class SignUpController: UIViewController {
     private let accountTypeSegmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Rider", "Driver"])
         sc.backgroundColor = .backgroundColour
-        
         sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.backgroundColour], for: .selected)
         sc.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
-        
-//        sc.tintColor = UIColor(white: 1, alpha: 0.87)
         sc.selectedSegmentIndex = 0
         return sc
+    }()
+    
+    
+    private let signupButton: AuthButton = {
+        let button = AuthButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(signupButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    
+    private let haveAccountButton: UIButton = {
+        let button = AccountButton(type: .system)
+        button.setupLabel(question: "Already have an account?", actionName: "Login")
+        button.addTarget(self, action: #selector(showLoginPage), for: .touchUpInside)
+        return button
     }()
     
     
@@ -79,6 +95,44 @@ class SignUpController: UIViewController {
         configureUI()
     }
     
+    
+    
+    //MARK: - Selectors
+    
+    
+    @objc private func signupButtonPressed() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullnameTextField.text else { return }
+        let accountTypeIndex = accountTypeSegmentedControl.selectedSegmentIndex
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            if let error = error {
+                print("DEBUG: Failed register user, error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let uid = result?.user.uid else { return }
+            
+            let values = ["email"       : email,
+                          "fullname"    : fullname,
+//                          "password"    : password,
+                          "accountType" : accountTypeIndex] as [String : Any]
+            
+            Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
+                print("DEBUG: Successfully registered and saved!")
+                let rootController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController
+                guard let controller = rootController as? HomeController else {return}
+                controller.configureUI()
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
+    @objc private func showLoginPage() {
+        navigationController?.popViewController(animated: true)
+    }
     
     
     
@@ -97,7 +151,8 @@ class SignUpController: UIViewController {
         let stack = UIStackView(arrangedSubviews: [emailContainerView,
                                                    fullnameContainerView,
                                                    passwordContainerView,
-                                                   accountTypeContainerView])
+                                                   accountTypeContainerView,
+                                                   signupButton])
         stack.axis = .vertical
         stack.distribution = .fill
         stack.spacing = 16
@@ -107,5 +162,11 @@ class SignUpController: UIViewController {
         stack.anchor(top: titleLabel.bottomAnchor, paddingTop: 40,
                      left: view.leftAnchor, paddingLeft: 16,
                      right: view.rightAnchor, paddingRight: 16)
+        
+        
+        /* Add bottom button */
+        view.addSubview(haveAccountButton)
+        haveAccountButton.centerX(inView: view)
+        haveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, height: 32)
     }
 }

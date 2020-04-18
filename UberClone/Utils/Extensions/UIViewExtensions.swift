@@ -22,6 +22,7 @@ extension UIView {
         let imageView = UIImageView()
         imageView.image = image
         imageView.alpha = 0.87
+        imageView.tintColor = .white
         view.addSubview(imageView)
         
         
