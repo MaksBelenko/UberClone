@@ -8,6 +8,7 @@
 
 import UIKit
 
+///Creates a button for Login/SignUp
 class AuthButton: UIButton {
 
     override init(frame: CGRect) {

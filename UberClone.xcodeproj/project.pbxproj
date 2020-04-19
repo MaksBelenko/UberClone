@@ -16,6 +16,13 @@
 		B535A1B9244B3195005585F0 /* AccountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1B8244B3195005585F0 /* AccountButton.swift */; };
 		B535A1BB244B37AF005585F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B535A1BA244B37AF005585F0 /* GoogleService-Info.plist */; };
 		B535A1BD244B6294005585F0 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1BC244B6294005585F0 /* HomeController.swift */; };
+		B535A1C2244C7FF4005585F0 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1C1244C7FF4005585F0 /* LocationInputActivationView.swift */; };
+		B535A1C4244C858F005585F0 /* CALayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1C3244C858F005585F0 /* CALayerExtensions.swift */; };
+		B535A1C6244C8E56005585F0 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1C5244C8E56005585F0 /* LocationInputView.swift */; };
+		B535A1C8244CA9C2005585F0 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1C7244CA9C2005585F0 /* LocationCell.swift */; };
+		B535A1CB244CAE45005585F0 /* AuthViewsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1CA244CAE45005585F0 /* AuthViewsHelper.swift */; };
+		B53E2BFF244CDCAE007EBFBC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E2BFE244CDCAE007EBFBC /* Service.swift */; };
+		B53E2C01244CE832007EBFBC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E2C00244CE832007EBFBC /* User.swift */; };
 		B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECD5E7244921CF00F0A82F /* AppDelegate.swift */; };
 		B5ECD5EA244921CF00F0A82F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECD5E9244921CF00F0A82F /* SceneDelegate.swift */; };
 		B5ECD5EF244921CF00F0A82F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5ECD5ED244921CF00F0A82F /* Main.storyboard */; };
@@ -34,6 +41,13 @@
 		B535A1B8244B3195005585F0 /* AccountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountButton.swift; sourceTree = "<group>"; };
 		B535A1BA244B37AF005585F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B535A1BC244B6294005585F0 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		B535A1C1244C7FF4005585F0 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
+		B535A1C3244C858F005585F0 /* CALayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayerExtensions.swift; sourceTree = "<group>"; };
+		B535A1C5244C8E56005585F0 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
+		B535A1C7244CA9C2005585F0 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		B535A1CA244CAE45005585F0 /* AuthViewsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewsHelper.swift; sourceTree = "<group>"; };
+		B53E2BFE244CDCAE007EBFBC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		B53E2C00244CE832007EBFBC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B5ECD5E4244921CF00F0A82F /* UberClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5ECD5E7244921CF00F0A82F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5ECD5E9244921CF00F0A82F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,8 +78,27 @@
 				B51DC243244A328700765BB8 /* UIViewExtensions.swift */,
 				B51DC241244A326300765BB8 /* UITextFieldExtensions.swift */,
 				B535A1B1244A3A91005585F0 /* UIColorExtensions.swift */,
+				B535A1C3244C858F005585F0 /* CALayerExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B535A1C9244CAE0D005585F0 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B535A1C7244CA9C2005585F0 /* LocationCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		B5D67026244CB44D0032198D /* Authorisation */ = {
+			isa = PBXGroup;
+			children = (
+				B535A1B6244B2C76005585F0 /* AuthButton.swift */,
+				B535A1B8244B3195005585F0 /* AccountButton.swift */,
+				B535A1CA244CAE45005585F0 /* AuthViewsHelper.swift */,
+			);
+			path = Authorisation;
 			sourceTree = "<group>";
 		};
 		B5ECD5DB244921CF00F0A82F = {
@@ -116,6 +149,7 @@
 		B5ECD6002449221500F0A82F /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				B53E2BFE244CDCAE007EBFBC /* Service.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -133,8 +167,10 @@
 		B5ECD6022449221B00F0A82F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B535A1B6244B2C76005585F0 /* AuthButton.swift */,
-				B535A1B8244B3195005585F0 /* AccountButton.swift */,
+				B5D67026244CB44D0032198D /* Authorisation */,
+				B535A1C1244C7FF4005585F0 /* LocationInputActivationView.swift */,
+				B535A1C5244C8E56005585F0 /* LocationInputView.swift */,
+				B535A1C9244CAE0D005585F0 /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -142,6 +178,7 @@
 		B5ECD6032449221E00F0A82F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B53E2C00244CE832007EBFBC /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -279,14 +316,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B535A1CB244CAE45005585F0 /* AuthViewsHelper.swift in Sources */,
 				B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */,
 				B535A1B7244B2C76005585F0 /* AuthButton.swift in Sources */,
+				B535A1C2244C7FF4005585F0 /* LocationInputActivationView.swift in Sources */,
 				B535A1B9244B3195005585F0 /* AccountButton.swift in Sources */,
+				B535A1C8244CA9C2005585F0 /* LocationCell.swift in Sources */,
 				B5ECD605244922B700F0A82F /* LoginController.swift in Sources */,
+				B53E2C01244CE832007EBFBC /* User.swift in Sources */,
 				B535A1BD244B6294005585F0 /* HomeController.swift in Sources */,
 				B535A1B4244A429C005585F0 /* SignUpController.swift in Sources */,
+				B53E2BFF244CDCAE007EBFBC /* Service.swift in Sources */,
+				B535A1C4244C858F005585F0 /* CALayerExtensions.swift in Sources */,
 				B51DC242244A326300765BB8 /* UITextFieldExtensions.swift in Sources */,
 				B535A1B2244A3A91005585F0 /* UIColorExtensions.swift in Sources */,
+				B535A1C6244C8E56005585F0 /* LocationInputView.swift in Sources */,
 				B5ECD5EA244921CF00F0A82F /* SceneDelegate.swift in Sources */,
 				B51DC244244A328700765BB8 /* UIViewExtensions.swift in Sources */,
 			);
@@ -436,6 +480,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KELPFZXFAP;
 				INFOPLIST_FILE = UberClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,6 +500,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KELPFZXFAP;
 				INFOPLIST_FILE = UberClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

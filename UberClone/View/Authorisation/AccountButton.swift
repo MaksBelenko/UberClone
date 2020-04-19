@@ -8,10 +8,9 @@
 
 import UIKit
 
+///Creates bottom button for change from Login to Signup and vice versa
 class AccountButton: UIButton {
     
-    
-
     func setupLabel(question: String, actionName: String) {
         let attributedTitle = NSMutableAttributedString(string: "\(question) ",attributes:
                                 [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16),

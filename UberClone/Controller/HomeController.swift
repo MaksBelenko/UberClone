@@ -17,7 +17,17 @@ class HomeController: UIViewController {
     private let mapView = MKMapView()
     private var testButton: UIButton!
     
+    private let inputActivationView = LocationInputActivationView()
+    private let locationInputView = LocationInputView()
+    private let tableView = UITableView()
     
+    private var user: User? {
+        didSet {
+            locationInputView.user = user
+        }
+    }
+    
+    private final let locationInputViewHeight: CGFloat = 160
     
     
     
@@ -27,10 +37,15 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         
         locationManager.delegate = self
+        inputActivationView.delegate = self
+        locationInputView.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
+    
         view.backgroundColor = .backgroundColour
         checkIfUserLoggedIn()
-        
+        fetchUserData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +55,13 @@ class HomeController: UIViewController {
     
     
     //MARK: - API
+    
+    func fetchUserData() {
+        Service.shared.fetchUserData { user in
+            self.user = user
+        }
+    }
+    
     
     private func checkIfUserLoggedIn() {
         if Auth.auth().currentUser?.uid == nil {
@@ -87,8 +109,40 @@ class HomeController: UIViewController {
     func configureUI() {
         print("DEBUG: Configuring Home UI")
         configureMapView()
+        setupTestButton()
+        
+        setupInputActivationView()
+        configureTableView()
+        configureLocationInputView()
+    }
     
-        testButton = UIButton(frame: CGRect(x: 00, y: 50, width: 100, height: 50))
+    
+    private func configureMapView() {
+        view.addSubview(mapView)
+        mapView.frame = view.frame
+        
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .followWithHeading
+        mapView.showsCompass = false
+    }
+    
+    
+    
+    private func setupInputActivationView() {
+        view.addSubview(inputActivationView)
+        inputActivationView.centerX(inView: view)
+        inputActivationView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 70,
+                                   width: view.frame.width - 64, height: 50)
+        inputActivationView.alpha = 0
+        
+        UIView.animate(withDuration: 2) {
+            self.inputActivationView.alpha = 1
+        }
+    }
+    
+    
+    private func setupTestButton() {
+        testButton = UIButton(frame: CGRect(x: 100, y: 30, width: 100, height: 50))
         testButton.setTitle("sign out", for: .normal)
         testButton.setTitleColor(.black, for: .normal)
         testButton.addTarget(self, action: #selector(signOut), for: .touchUpInside)
@@ -96,14 +150,28 @@ class HomeController: UIViewController {
     }
     
     
-    func configureMapView() {
-        view.addSubview(mapView)
-        mapView.frame = view.frame
+    
+    private func configureLocationInputView() {
+        view.addSubview(locationInputView)
+        locationInputView.anchor(top: view.topAnchor,
+                                 left: view.leftAnchor,
+                                 right: view.rightAnchor,
+                                 height: locationInputViewHeight)
         
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = .followWithHeading
+        locationInputView.alpha = 0
     }
 
+    
+    private func configureTableView() {
+        tableView.register(LocationCell.self, forCellReuseIdentifier: reuseIdentifierLocationCell)
+        tableView.rowHeight = 60
+        tableView.tableFooterView = UIView()
+        
+        let height = view.frame.height - locationInputViewHeight
+        tableView.frame = CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: height)
+        
+        view.addSubview(tableView)
+    }
 }
 
 
@@ -141,3 +209,66 @@ extension HomeController: CLLocationManagerDelegate {
         }
     }
 }
+
+
+//MARK: - Location Input Activation View
+
+extension HomeController: LocationInputActivationViewDelegate {
+    
+    func presentLocationInputView() {
+        print("DEBUG: Present input activation view")
+        self.inputActivationView.alpha = 0
+        
+        UIView.animate(withDuration: 0.3){
+            self.locationInputView.alpha = 1
+        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.tableView.frame.origin.y = self.locationInputViewHeight
+        }, completion: nil)
+    }
+}
+
+
+//MARK: - Location Input View
+
+extension HomeController: LocationInputViewDelegate {
+    
+    func dismissLocationInputView() {
+        print("DEBUG: Dismiss location input view")
+        UIView.animate(withDuration: 0.3, animations: {
+            self.locationInputView.alpha = 0
+            self.tableView.frame.origin.y = self.view.frame.height
+        }) { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.inputActivationView.alpha = 1
+            }
+        }
+    }
+}
+
+
+//MARK: - TableView
+
+extension HomeController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "test"
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (section == 0) ? 2 : 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierLocationCell, for: indexPath) as! LocationCell
+        return cell
+    }
+    
+    
+}
+
