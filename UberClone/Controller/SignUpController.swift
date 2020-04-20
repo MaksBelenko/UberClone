@@ -8,12 +8,14 @@
 
 import UIKit
 import Firebase
+import GeoFire
 
 
 class SignUpController: UIViewController {
-        
+    
     let authViewsHelper = AuthViewsHelper()
-   
+    private var location = LocationHandler.shared.locationManager.location
+    
     
     
     //MARK: - Lifecycle
@@ -84,21 +86,40 @@ class SignUpController: UIViewController {
             
             let values = ["email"       : email,
                           "fullname"    : fullname,
-                          //                          "password"    : password,
-                "accountType" : accountTypeIndex] as [String : Any]
+                          "accountType" : accountTypeIndex] as [String : Any]
             
-            Database.database().reference().child("users").child(uid).updateChildValues(values) { (error, ref) in
-                print("DEBUG: Successfully registered and saved!")
-                let rootController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController
-                guard let controller = rootController as? HomeController else {return}
-                controller.configureUI()
-                self.dismiss(animated: true, completion: nil)
+            
+            if accountTypeIndex == 1{
+                let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
+                
+                guard let location = self.location else { return }
+                geofire.setLocation(location, forKey: uid) { (error) in
+                    self.uploadUserDataAndShowHomeController(uid: uid, values: values)
+                }
+            } else {
+                self.uploadUserDataAndShowHomeController(uid: uid, values: values)
             }
         }
     }
     
     
+    
     @objc private func showLoginPage() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    
+    
+    
+    //MARK: - Helper Functions
+    
+    private func uploadUserDataAndShowHomeController(uid: String, values: [String:Any]) {
+        REF_USERS.child(uid).updateChildValues(values) { (error, ref) in
+            print("DEBUG: Successfully registered and saved!")
+            let rootController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController
+            guard let controller = rootController as? HomeController else {return}
+            controller.configureUI()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }

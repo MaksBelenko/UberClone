@@ -6,10 +6,14 @@
 //  Copyright © 2020 Maksim. All rights reserved.
 //
 
+import CoreLocation
+
 struct User {
     let fullname: String
     let email: String
     let accountType: Int
+    var location: CLLocation?
+    
     
     init(dictionary: [String : Any]) {
         self.fullname = dictionary["fullname"] as? String ?? ""

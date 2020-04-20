@@ -23,6 +23,7 @@
 		B535A1CB244CAE45005585F0 /* AuthViewsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1CA244CAE45005585F0 /* AuthViewsHelper.swift */; };
 		B53E2BFF244CDCAE007EBFBC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E2BFE244CDCAE007EBFBC /* Service.swift */; };
 		B53E2C01244CE832007EBFBC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E2C00244CE832007EBFBC /* User.swift */; };
+		B560F5E9244E2915004C3E6E /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560F5E8244E2915004C3E6E /* LocationHandler.swift */; };
 		B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECD5E7244921CF00F0A82F /* AppDelegate.swift */; };
 		B5ECD5EA244921CF00F0A82F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECD5E9244921CF00F0A82F /* SceneDelegate.swift */; };
 		B5ECD5EF244921CF00F0A82F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5ECD5ED244921CF00F0A82F /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		B535A1CA244CAE45005585F0 /* AuthViewsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewsHelper.swift; sourceTree = "<group>"; };
 		B53E2BFE244CDCAE007EBFBC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B53E2C00244CE832007EBFBC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B560F5E8244E2915004C3E6E /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		B5ECD5E4244921CF00F0A82F /* UberClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5ECD5E7244921CF00F0A82F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5ECD5E9244921CF00F0A82F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				B51DC245244A329F00765BB8 /* Extensions */,
+				B560F5E8244E2915004C3E6E /* LocationHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				B535A1CB244CAE45005585F0 /* AuthViewsHelper.swift in Sources */,
 				B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */,
 				B535A1B7244B2C76005585F0 /* AuthButton.swift in Sources */,
+				B560F5E9244E2915004C3E6E /* LocationHandler.swift in Sources */,
 				B535A1C2244C7FF4005585F0 /* LocationInputActivationView.swift in Sources */,
 				B535A1B9244B3195005585F0 /* AccountButton.swift in Sources */,
 				B535A1C8244CA9C2005585F0 /* LocationCell.swift in Sources */,
