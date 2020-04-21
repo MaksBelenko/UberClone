@@ -21,6 +21,8 @@
 		B535A1C6244C8E56005585F0 /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1C5244C8E56005585F0 /* LocationInputView.swift */; };
 		B535A1C8244CA9C2005585F0 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1C7244CA9C2005585F0 /* LocationCell.swift */; };
 		B535A1CB244CAE45005585F0 /* AuthViewsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B535A1CA244CAE45005585F0 /* AuthViewsHelper.swift */; };
+		B536AA91244F759A0056E64E /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536AA90244F759A0056E64E /* DriverAnnotation.swift */; };
+		B536AA93244F970D0056E64E /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536AA92244F970D0056E64E /* Enums.swift */; };
 		B53E2BFF244CDCAE007EBFBC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E2BFE244CDCAE007EBFBC /* Service.swift */; };
 		B53E2C01244CE832007EBFBC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53E2C00244CE832007EBFBC /* User.swift */; };
 		B560F5E9244E2915004C3E6E /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B560F5E8244E2915004C3E6E /* LocationHandler.swift */; };
@@ -47,6 +49,8 @@
 		B535A1C5244C8E56005585F0 /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		B535A1C7244CA9C2005585F0 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		B535A1CA244CAE45005585F0 /* AuthViewsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewsHelper.swift; sourceTree = "<group>"; };
+		B536AA90244F759A0056E64E /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
+		B536AA92244F970D0056E64E /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		B53E2BFE244CDCAE007EBFBC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		B53E2C00244CE832007EBFBC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B560F5E8244E2915004C3E6E /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 		B5ECD5FF2449221300F0A82F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B536AA92244F970D0056E64E /* Enums.swift */,
 				B51DC245244A329F00765BB8 /* Extensions */,
 				B560F5E8244E2915004C3E6E /* LocationHandler.swift */,
 			);
@@ -182,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				B53E2C00244CE832007EBFBC /* User.swift */,
+				B536AA90244F759A0056E64E /* DriverAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +327,7 @@
 			files = (
 				B535A1CB244CAE45005585F0 /* AuthViewsHelper.swift in Sources */,
 				B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */,
+				B536AA93244F970D0056E64E /* Enums.swift in Sources */,
 				B535A1B7244B2C76005585F0 /* AuthButton.swift in Sources */,
 				B560F5E9244E2915004C3E6E /* LocationHandler.swift in Sources */,
 				B535A1C2244C7FF4005585F0 /* LocationInputActivationView.swift in Sources */,
@@ -333,6 +340,7 @@
 				B53E2BFF244CDCAE007EBFBC /* Service.swift in Sources */,
 				B535A1C4244C858F005585F0 /* CALayerExtensions.swift in Sources */,
 				B51DC242244A326300765BB8 /* UITextFieldExtensions.swift in Sources */,
+				B536AA91244F759A0056E64E /* DriverAnnotation.swift in Sources */,
 				B535A1B2244A3A91005585F0 /* UIColorExtensions.swift in Sources */,
 				B535A1C6244C8E56005585F0 /* LocationInputView.swift in Sources */,
 				B5ECD5EA244921CF00F0A82F /* SceneDelegate.swift in Sources */,

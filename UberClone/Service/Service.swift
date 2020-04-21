@@ -21,6 +21,10 @@ struct Service {
     ///let constant in order to share Service
     static let shared = Service()
     
+    let driversGeofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
+    
+    
+    
     
     /**
      Fetches user data for specified uid
@@ -28,27 +32,24 @@ struct Service {
      - Parameter completion: Closure that returns the user data
      */
     func fetchUserData(uid: String, completion: @escaping(User) -> Void) {
-        print("DEBUG: Fetching use data for uid = \(uid)")
-        
         REF_USERS.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
-            let user = User(dictionary: dictionary)
+            let uid = snapshot.key
+            let user = User(uid: uid, dictionary: dictionary)
             
             completion(user)
         }
     }
     
     
-    
     /**
-     Fetches nearby drivers' locations
+     Listens for drivers events in the radius
+     - Parameter driverEvent: The event to listen for.
      - Parameter location: Location of the rider
      - Parameter completion: Closure that returns drivers in the area
      */
-    func fetchDrivers(location: CLLocation, completion: @escaping(User) -> Void) {
-        let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
-        
-        geofire.query(at: location, withRadius: 50).observe(.keyEntered, with: { (uid, location) in
+    func listenDriver(for driverEvent: DriverLocationInRadius, location: CLLocation, completion: @escaping(User) -> Void) {
+        driversGeofire.query(at: location, withRadius: 50).observe(driverEvent.gfEventType(), with: { (uid, location) in
             self.fetchUserData(uid: uid) { (user) in
                 var driver = user
                 driver.location = location
@@ -56,6 +57,4 @@ struct Service {
             }
         })
     }
-    
-    
 }

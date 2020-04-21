@@ -36,7 +36,7 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        locationManager.delegate = self
+        mapView.delegate = self
         inputActivationView.delegate = self
         locationInputView.delegate = self
         tableView.delegate = self
@@ -64,20 +64,55 @@ class HomeController: UIViewController {
         }
     }
     
+    
     func fetchDrivers() {
         guard let location  = locationManager?.location else { return }
-        Service.shared.fetchDrivers(location: location) { (user) in
-            print("DEBUG: Driver is \(user.fullname)")
+        
+        /* Driver appeared in the Radius */
+        Service.shared.listenDriver(for: .driverAppeared, location: location) { (driver) in
+            guard let coordinate = driver.location?.coordinate else { return }
+            let annotation = DriverAnnotation(uid: driver.uid, coordinate: coordinate)
+            
+            self.mapView.addAnnotation(annotation)
         }
+        
+        /* Drivers location changed within the radius */
+        Service.shared.listenDriver(for: .driverChangedLocation, location: location) { (driver) in
+            guard let coordinate = driver.location?.coordinate else { return }
+            
+            for annotation in self.mapView.annotations {
+                guard let driverAnno = annotation as? DriverAnnotation else { continue }
+                if driverAnno.uid == driver.uid {
+                    print("DEBUG: Update \(driver.fullname) driver position")
+                    driverAnno.updateAnnotationPosition(with: coordinate)
+                    return
+                }
+            }
+        }
+        
+        /* Driver exited the radius */
+        Service.shared.listenDriver(for: .driverExited, location: location) { (driver) in
+            for annotation in self.mapView.annotations {
+                guard let driverAnno = annotation as? DriverAnnotation else { continue }
+                if driverAnno.uid == driver.uid {
+                    self.mapView.removeAnnotation(driverAnno)
+                    return
+                }
+            }
+        }
+        
     }
     
     
+    
+    
+    
+    //MARK: - LoggedIn & Signout
     private func checkIfUserLoggedIn() {
         if Auth.auth().currentUser?.uid == nil {
             print("DEBUG: User NOT logged in")
             showLoginPage()
         } else {
-            print("DEBUG: User id is \(Auth.auth().currentUser?.uid)")
             configureUI()
         }
     }
@@ -182,6 +217,36 @@ class HomeController: UIViewController {
         view.addSubview(tableView)
     }
 }
+
+
+
+
+
+//MARK: - MKMapViewDelegate
+
+extension HomeController: MKMapViewDelegate {
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? DriverAnnotation {
+            let view = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            
+            let image = #imageLiteral(resourceName: "DriverIconSmall")
+            let resizedSize = CGSize(width: 50, height: 25)
+
+            UIGraphicsBeginImageContext(resizedSize)
+            image.draw(in: CGRect(origin: .zero, size: resizedSize))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            view.image = resizedImage
+            return view
+        }
+        return nil
+    }
+}
+
+
 
 
 //MARK: - Location Services
