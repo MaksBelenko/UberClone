@@ -32,6 +32,7 @@
 		B5ECD5F1244921D000F0A82F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5ECD5F0244921D000F0A82F /* Assets.xcassets */; };
 		B5ECD5F4244921D000F0A82F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5ECD5F2244921D000F0A82F /* LaunchScreen.storyboard */; };
 		B5ECD605244922B700F0A82F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECD604244922B700F0A82F /* LoginController.swift */; };
+		B5FBC4D4245244DB005F5BFA /* MKPlacemarkExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FBC4D3245244DB005F5BFA /* MKPlacemarkExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		B5ECD5F3244921D000F0A82F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5ECD5F5244921D000F0A82F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5ECD604244922B700F0A82F /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		B5FBC4D3245244DB005F5BFA /* MKPlacemarkExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPlacemarkExtensions.swift; sourceTree = "<group>"; };
 		CD19DF427DC2592639852A04 /* Pods-UberClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberClone.debug.xcconfig"; path = "Target Support Files/Pods-UberClone/Pods-UberClone.debug.xcconfig"; sourceTree = "<group>"; };
 		F1A8EF2178BD61DBDCB5A397 /* Pods_UberClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 				B51DC241244A326300765BB8 /* UITextFieldExtensions.swift */,
 				B535A1B1244A3A91005585F0 /* UIColorExtensions.swift */,
 				B535A1C3244C858F005585F0 /* CALayerExtensions.swift */,
+				B5FBC4D3245244DB005F5BFA /* MKPlacemarkExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B535A1CB244CAE45005585F0 /* AuthViewsHelper.swift in Sources */,
+				B5FBC4D4245244DB005F5BFA /* MKPlacemarkExtensions.swift in Sources */,
 				B5ECD5E8244921CF00F0A82F /* AppDelegate.swift in Sources */,
 				B536AA93244F970D0056E64E /* Enums.swift in Sources */,
 				B535A1B7244B2C76005585F0 /* AuthButton.swift in Sources */,

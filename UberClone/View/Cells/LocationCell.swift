@@ -7,16 +7,23 @@
 //
 
 import UIKit
+import MapKit
 
 let reuseIdentifierLocationCell = "LocationCell"
 
 
 class LocationCell: UITableViewCell {
 
+    var placemark: MKPlacemark? {
+        didSet{
+            titleLabel.text = placemark?.name
+            addressLabel.text = placemark?.address
+        }
+    }
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "29 Berry St"
         return label
     }()
     
@@ -24,7 +31,6 @@ class LocationCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .lightGray
-        label.text = "Liberty Living Plc, 29 Berry St, Manchester, M1 2AR"
         return label
     }()
     
